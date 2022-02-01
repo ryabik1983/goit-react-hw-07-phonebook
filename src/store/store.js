@@ -5,7 +5,6 @@ import {
 } from '@reduxjs/toolkit';
 import {
   persistStore,
-  persistReducer,
   FLUSH,
   REHYDRATE,
   PAUSE,
@@ -13,7 +12,7 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+// import storage from 'redux-persist/lib/storage';
 import appReducer from './reducer';
 import logger from 'redux-logger';
 
@@ -26,14 +25,18 @@ const middleware = [
   logger,
 ];
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-  blacklist: ['filter'],
-};
+// const persistConfig = {
+//   key: 'contacts',
+//   storage,
+//   blacklist: ['filter'],
+// };
+
+// const rootReducer = combineReducers({
+//   app: persistReducer(persistConfig, appReducer),
+// });
 
 const rootReducer = combineReducers({
-  app: persistReducer(persistConfig, appReducer),
+  app: appReducer,
 });
 
 export const store = configureStore({
