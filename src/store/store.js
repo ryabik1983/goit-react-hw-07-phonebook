@@ -16,12 +16,17 @@ import {
 import appReducer from './reducer';
 import logger from 'redux-logger';
 
+const myMiddleware = store => next => action => {
+  console.log('My middleware!', action);
+};
+
 const middleware = [
   ...getDefaultMiddleware({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
     },
   }),
+  myMiddleware,
   logger,
 ];
 
@@ -34,6 +39,7 @@ const middleware = [
 // const rootReducer = combineReducers({
 //   app: persistReducer(persistConfig, appReducer),
 // });
+
 
 const rootReducer = combineReducers({
   app: appReducer,
