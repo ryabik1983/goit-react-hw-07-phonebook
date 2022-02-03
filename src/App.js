@@ -3,7 +3,13 @@ import ContactForm from './components/ContactForm/ContactForm';
 import Filter from './components/Filter/Filter';
 import ContactsList from './components/ContactList/ContactList';
 import { useDispatch } from 'react-redux';
-import * as actions from './store/action';
+import { addContactsRequest,
+  addContactsSuccess,
+  addContactsError,
+  addContact,
+  deleteContact,
+  filterContacts,
+  } from './action';
 import './App.css';
 
 

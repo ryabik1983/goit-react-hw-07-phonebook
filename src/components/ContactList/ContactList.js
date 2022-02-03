@@ -1,9 +1,15 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import styles from './ContactList.module.css';
-import * as actions from '../../store/operations';
+import { operations, selectors } from '../../store';
+// import * as actions from '../../store/operations';
 
 const ContactsList = () => {
+  const dispatch = useDispatch();
+  const contactsData = useSelector(selectors.getContacts);
+  useEffect(() => dispatch(operations.fetchContacts()), [dispatch]);
+  
   const items = useSelector(({ app }) => {
     const toLowerCaseFilter = app.filter.toLowerCase();
     const items = app.contacts.filter(el =>
@@ -11,8 +17,7 @@ const ContactsList = () => {
     );
     return items;
   });
-  const dispatch = useDispatch();
-
+  
   return (
     <ul className={styles.list}>
       {items.map(el => {
