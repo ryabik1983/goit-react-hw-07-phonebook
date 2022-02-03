@@ -10,9 +10,9 @@ const ContactsList = () => {
   const contactsData = useSelector(selectors.getContacts);
   useEffect(() => dispatch(operations.fetchContacts()), [dispatch]);
   
-  const items = useSelector(({ app }) => {
-    const toLowerCaseFilter = app.filter.toLowerCase();
-    const items = app.contacts.filter(el =>
+  const items = useSelector(({ contacts }) => {
+    const toLowerCaseFilter = contacts.filter.toLowerCase();
+    const items = contactsData.filter(el =>
       el.name.toLowerCase().includes(toLowerCaseFilter),
     );
     return items;
@@ -24,14 +24,14 @@ const ContactsList = () => {
         return (
           <li className={styles.item} key={el.id}>
             <span className={styles.span}>
-              {el.name}: {el.number}
+              {el.name}: {el.phone}
             </span>
             <button
               className={styles.btn}
               type="button"
               id={el.id}
               onClick={() => {
-                dispatch(actions.deleteContact(el.id));
+                dispatch(operations.deleteContact(el.id));
               }}
             >
               Delete
